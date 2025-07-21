@@ -6,14 +6,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/nikhilagran/decalarativepipeline.git'
             }
         }
-
-        stage('Build') {
-            steps {
-                // Example: Maven build
-                bat 'mvn clean install'
-            }
+stage('Build') {
+    steps {
+        dir('myapp') {
+            bat 'mvn clean install'
         }
-
+    }
+}
         stage('Test') {
             steps {
                 // Run unit tests
