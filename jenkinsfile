@@ -29,12 +29,15 @@ stage('Build') {
         // bat 'actual-deploy-script.bat'   <-- Only if you have real deployment
     }
 }
-    post {
+ post {
+        always {
+            echo 'Pipeline finished.'
+        }
         success {
             echo 'Pipeline succeeded!'
         }
         failure {
-            echo 'Pipeline failed.'
+            echo 'Pipeline failed!'
         }
     }
 }
