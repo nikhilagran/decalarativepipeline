@@ -1,31 +1,37 @@
 pipeline {
     agent any
+
     tools {
- maven 'apache-maven-3.9.11'
-}
-    stages {
-      stage('Clone Repository') {
-    steps {
-        git branch: 'main', url: 'https://github.com/nikhilagran/decalarativepipeline.git'
+       maven 'apache-maven-3.9.11'
     }
-}
-}
-        stage('Build') {
+
+    stages {
+        stage('Clone Repository') {
             steps {
-                    bat 'mvn clean install'
-                }
-            }
-        stage('Test') {
-            steps {
-                    bat 'mvn test'
+                git branch: 'main', url: 'https://github.com/nikhilagran/decalarativepipeline.git'
             }
         }
+
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
             }
         }
- post {
+    }
+
+    post {
         always {
             echo 'Pipeline finished.'
         }
