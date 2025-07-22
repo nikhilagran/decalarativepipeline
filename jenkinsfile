@@ -1,16 +1,15 @@
 pipeline {
     agent any
-
     tools {
  maven 'apache-maven-3.9.11'
 }
     stages {
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/nikhilagran/decalarativepipeline.git'
-            }
-        }
-
+      stage('Clone Repository') {
+    steps {
+        git branch: 'main', url: 'https://github.com/nikhilagran/decalarativepipeline.git'
+    }
+}
+}
         stage('Build') {
             steps {
                 dir('myapp') {
@@ -18,7 +17,6 @@ pipeline {
                 }
             }
         }
-
         stage('Test') {
             steps {
                 dir('myapp') {
@@ -33,8 +31,7 @@ pipeline {
             }
         }
     }
-
-    post {
+ post {
         always {
             echo 'Pipeline finished.'
         }
