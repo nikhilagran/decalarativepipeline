@@ -1,0 +1,5 @@
+# Ignore all target folders anywhere in the repo
+target/
+
+# Or explicitly ignore the nested target directory:
+myapp/apache-maven-3.9.11/bin/myapp/target/
