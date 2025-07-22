@@ -16,13 +16,13 @@ stage('Build') {
         }
     }
 }
-        stage('Test') {
-            steps {
-                // Run unit tests
-                bat 'mvn test'
-            }
+       stage('Test') {
+    steps {
+  dir('myapp') {
+        bat 'mvn test'
+    }
+}
         }
-
         stage('Deploy') {
             steps {
                 bat 'Deploying the application...'
