@@ -12,19 +12,14 @@ pipeline {
 }
         stage('Build') {
             steps {
-                dir('myapp') {
                     bat 'mvn clean install'
                 }
             }
-        }
         stage('Test') {
             steps {
-                dir('myapp') {
                     bat 'mvn test'
-                }
             }
         }
-
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
