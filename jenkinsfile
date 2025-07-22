@@ -23,14 +23,12 @@ stage('Build') {
     }
 }
         }
-        stage('Deploy') {
-            steps {
-                bat 'Deploying the application...'
-                // Add deployment commands here
-            }
-        }
+       stage('Deploy') {
+    steps {
+        echo 'Deploying the application...'
+        // bat 'actual-deploy-script.bat'   <-- Only if you have real deployment
     }
-
+}
     post {
         success {
             echo 'Pipeline succeeded!'
