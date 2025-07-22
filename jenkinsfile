@@ -1,35 +1,42 @@
 pipeline {
     agent any
-tools {
-    maven 'apache-maven-3.9.11' // Use the exact name you gave in Jenkins
-}
+
+    tools {
+        maven 'Maven'    // Adjust this to match the Maven name in Jenkins global tool config
+        jdk 'JDK'        // Adjust this if needed
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/nikhilagran/decalarativepipeline.git'
+                git 'https://github.com/nikhilagran/decalarativepipeline.git'
             }
         }
-stage('Build') {
-    steps {
-        dir('myapp') {
-            bat 'mvn clean install'
+
+        stage('Build') {
+            steps {
+                dir('myapp') {
+                    bat 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('myapp') {
+                    bat 'mvn test'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+            }
         }
     }
-}
-       stage('Test') {
-    steps {
-  dir('myapp') {
-        bat 'mvn test'
-    }
-}
-        }
-       stage('Deploy') {
-    steps {
-        echo 'Deploying the application...'
-        // bat 'actual-deploy-script.bat'   <-- Only if you have real deployment
-    }
-}
- post {
+
+    post {
         always {
             echo 'Pipeline finished.'
         }
@@ -40,5 +47,4 @@ stage('Build') {
             echo 'Pipeline failed!'
         }
     }
-}
 }
